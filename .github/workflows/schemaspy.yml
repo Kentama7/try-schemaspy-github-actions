@@ -1,0 +1,28 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Create database docments
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create_documents:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - run: docker compose up -d
+
+      - name: create database documents
+        run: docker run --rm --net="host" -v $PWD/schemaspy/output:/output -v $PWD/schemaspy/schemaspy.properties:/schemaspy.properties schemaspy/schemaspy:latest
+
+      - name: commit & push
+        run: |
+          git config user.name ${{ secrets.GIT_ACCOUNT }}
+          git config user.email ${{ secrets.GIT_EMAIL }}
+          git add .
+          git commit -m "Create"
+          git push
+
+      - run: docker compose down
