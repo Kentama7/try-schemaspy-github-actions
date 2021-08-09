@@ -1,4 +1,5 @@
 flyway_schema_history
+accounts
 user_details
 company_details
 users
