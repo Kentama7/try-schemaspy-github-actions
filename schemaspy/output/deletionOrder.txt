@@ -1,0 +1,5 @@
+flyway_schema_history
+user_details
+company_details
+users
+companies
