@@ -14,13 +14,13 @@ jobs:
 
       - run: docker-compose up -d
 
-      - name: create database documents
+      - name: Create database documents
         run: docker run --user root --rm --net="host" -v $PWD/schemaspy/output:/output -v $PWD/schemaspy/schemaspy.properties:/schemaspy.properties schemaspy/schemaspy:latest
 
       - name: commit & push
         run: |
-          git config user.name ${{ secrets.GIT_ACCOUNT }}
-          git config user.email ${{ secrets.GIT_EMAIL }}
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           git add .
           git commit -m "Create"
           git push
