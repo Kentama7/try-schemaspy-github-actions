@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - run: docker compose up -d
+      - run: docker-compose up -d
 
       - name: create database documents
         run: docker run --rm --net="host" -v $PWD/schemaspy/output:/output -v $PWD/schemaspy/schemaspy.properties:/schemaspy.properties schemaspy/schemaspy:latest
@@ -25,4 +25,4 @@ jobs:
           git commit -m "Create"
           git push
 
-      - run: docker compose down
+      - run: docker-compose down
