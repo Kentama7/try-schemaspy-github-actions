@@ -15,7 +15,7 @@ jobs:
       - run: docker-compose up -d
 
       - name: create database documents
-        run: docker run --rm --net="host" -v $PWD/schemaspy/output:/output -v $PWD/schemaspy/schemaspy.properties:/schemaspy.properties schemaspy/schemaspy:latest -u root
+        run: docker run --user root --rm --net="host" -v $PWD/schemaspy/output:/output -v $PWD/schemaspy/schemaspy.properties:/schemaspy.properties schemaspy/schemaspy:latest
 
       - name: commit & push
         run: |
